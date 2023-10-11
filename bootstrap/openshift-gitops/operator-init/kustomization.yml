@@ -1,0 +1,10 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - instance.yml
+  - repo-upstream.yml
+  - ocp-o11y-appofapps.yml
+  - ocp-o11y-appproject.yml
+  - console-plugin-patch-job.yml

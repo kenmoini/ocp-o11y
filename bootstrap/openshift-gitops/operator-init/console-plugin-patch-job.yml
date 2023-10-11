@@ -1,0 +1,59 @@
+# oc patch console.operator cluster --type json -p '[{"op": "add", "path": "/spec/plugins", "value": ["gitops-plugin"]}]'
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: patch-console
+  namespace: openshift-gitops
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: patch-console
+rules:
+  - apiGroups:
+      - operator.openshift.io
+    resources:
+      - consoles
+    verbs:
+      - get
+      - list
+      - update
+      - patch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: patch-console
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: patch-console
+subjects:
+  - kind: ServiceAccount
+    name: patch-console
+    namespace: openshift-gitops
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: enable-gitops-plugin
+  namespace: openshift-gitops
+spec:
+  selector: {}
+  template:
+    metadata:
+      name: enable-gitops-plugin
+    spec:
+      containers:
+        - name: enable-gitops-plugin
+          image: registry.redhat.io/openshift4/ose-cli:latest
+          command:
+            - /bin/bash
+            - -c
+            - |
+              #!/usr/bin/env bash
+
+              oc patch console.operator cluster --type json -p '[{"op": "add", "path": "/spec/plugins", "value": ["gitops-plugin"]}]'
+      restartPolicy: Never
+      serviceAccountName: patch-console
