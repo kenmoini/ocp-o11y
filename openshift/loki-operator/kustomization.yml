@@ -6,3 +6,5 @@ resources:
   - namespace.yml
   - subscription.yml
   - bucketobjectclaim.yml
+  - secret-sync-cronjob.yml
+  - lokistack.yml
