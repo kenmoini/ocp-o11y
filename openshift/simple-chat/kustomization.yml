@@ -4,3 +4,12 @@ kind: Kustomization
 
 resources:
   - github.com/kenmoini/smart-drone-patterns/apps/simple-chat/deployment/overlays/persistent
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /data/connection.js
+        value: 'const wssEndpoint = "wss://ws-simple-chat.apps.core-ocp.d70.lab.kemo.network";'
+    target:
+      kind: ConfigMap
+      name: simple-chat-ws-js
