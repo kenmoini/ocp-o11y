@@ -7,4 +7,5 @@ resources:
   - operatorgroup.yml
   - subscription.yml
   - console-plugin-patch-job.yml
+  - flowlog-rbac.yml
   - flowcollector.yml

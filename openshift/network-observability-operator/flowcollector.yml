@@ -75,14 +75,14 @@ spec:
         type: configmap
         name: loki-gateway-ca-bundle
         certFile: service-ca.crt
-      insecureSkipVerify: false
+      insecureSkipVerify: true
     statusTls:
       enable: true
       caCert:
         certFile: service-ca.crt
         name: loki-ca-bundle
         type: configmap
-      insecureSkipVerify: false
+      insecureSkipVerify: true
       userCert:
         certFile: tls.crt
         certKey: tls.key

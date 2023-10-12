@@ -32,7 +32,7 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: patch-console
-    namespace: openshift-gitops
+    namespace: openshift-netobserv-operator
 ---
 apiVersion: batch/v1
 kind: Job
