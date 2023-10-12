@@ -249,6 +249,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: memory-hungry
+  namespace: bad-workloads
   labels:
     app: memory-hungry
 spec:
@@ -263,6 +264,7 @@ apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
   name: memory-hungry
+  namespace: bad-workloads
 spec:
   port:
     targetPort: http
