@@ -9,3 +9,4 @@ resources:
   - alertmanager-config.yml
   - bad-workloads.yml
   - loki-operator.yml
+  - network-observability-operator.yml
