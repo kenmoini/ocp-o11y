@@ -1,0 +1,16 @@
+---
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: loki-storage-bucket
+  namespace: netobserv
+  labels:
+    app: noobaa
+    bucket-provisioner: openshift-storage.noobaa.io-obc
+    noobaa-domain: openshift-storage.noobaa.io
+spec:
+  additionalConfig:
+    bucketclass: noobaa-default-bucket-class
+  objectBucketName: loki-storage-bucket
+  bucketName: loki-storage-bucket
+  storageClassName: openshift-storage.noobaa.io
