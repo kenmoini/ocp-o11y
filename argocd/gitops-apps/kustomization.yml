@@ -4,3 +4,4 @@ kind: Kustomization
 
 resources:
   - openshift-logging.yml
+  - openshift-elasticsearch-operator.yml
