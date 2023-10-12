@@ -2,10 +2,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: simple-chat
+  name: alertmanager-config
   namespace: openshift-gitops
   annotations:
-    argocd.argoproj.io/sync-wave: "0"
+    argocd.argoproj.io/sync-wave: "1"
     argocd.argoproj.io/compare-options: IgnoreExtraneous
 spec:
   syncPolicy:
@@ -20,7 +20,7 @@ spec:
   sources:
     - repoURL: 'https://github.com/kenmoini/ocp-o11y'
       targetRevision: HEAD
-      path: openshift/simple-chat/
+      path: openshift/alertmanager-config/
       #directory:
       #  recurse: true
       kustomize:

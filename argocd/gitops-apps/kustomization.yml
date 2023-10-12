@@ -6,3 +6,4 @@ resources:
   - openshift-logging.yml
   - openshift-elasticsearch-operator.yml
   - simple-chat.yml
+  - alertmanager-config.yml
