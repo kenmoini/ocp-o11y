@@ -4,6 +4,8 @@ kind: LokiStack
 metadata:
   name: loki
   namespace: netobserv   
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
 spec:
   size: 1x.extra-small
   storage:
