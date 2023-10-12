@@ -219,30 +219,53 @@ spec:
         app: memory-hungry
         # maistra.io/expose-route: "true"
     spec:
+      volumes:
+        - name: vertx
+          emptyDir: {}
       containers:
-      - name: memory-hungry
-        image: quay.io/voravitl/leak:native
-        imagePullPolicy: Always
-        env:
-          - name: APP_DISHSIZE
-            value: "10485760"
-        resources:
-          requests:
-            cpu: "0.05"
-            memory: 60Mi
-          limits:
-            cpu: "0.1"
-            memory: 100Mi
-        securityContext:
-          seccompProfile: #"RuntimeDefault" or "Localhost"
-            type: RuntimeDefault
-          allowPrivilegeEscalation: false
-          runAsNonRoot: true
-          capabilities:
-            drop: ["ALL"]
-          readOnlyRootFilesystem: true
-        ports:
-        - containerPort: 8080
+        - name: curl-killer
+          image:  registry.redhat.io/openshift4/ose-cli:latest
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: "500m"
+              memory: 128Mi
+            limits:
+              cpu: "1"
+              memory: 512Mi
+            command:
+              - /bin/bash
+              - -c
+              - |
+                #!/usr/bin/env bash
+                curl http://memory-hungry.bad-workloads.svc.cluster.local:8080/eat/6
+
+        - volumeMounts:
+            - name: vertx
+              mountPath: /tmp/vertx-cache
+          name: memory-hungry
+          image: quay.io/voravitl/leak:native
+          imagePullPolicy: Always
+          env:
+            - name: APP_DISHSIZE
+              value: "10485760"
+          resources:
+            requests:
+              cpu: "0.05"
+              memory: 60Mi
+            limits:
+              cpu: "0.1"
+              memory: 100Mi
+          securityContext:
+            seccompProfile: #"RuntimeDefault" or "Localhost"
+              type: RuntimeDefault
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            capabilities:
+              drop: ["ALL"]
+            readOnlyRootFilesystem: true
+          ports:
+          - containerPort: 8080
       terminationGracePeriodSeconds: 10
 ---
 apiVersion: v1
