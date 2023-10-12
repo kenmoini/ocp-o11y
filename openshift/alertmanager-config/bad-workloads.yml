@@ -238,7 +238,10 @@ spec:
               - -c
               - |
                 #!/usr/bin/env bash
-                curl http://memory-hungry.bad-workloads.svc.cluster.local:8080/eat/6
+                while true; do
+                  curl http://memory-hungry.bad-workloads.svc.cluster.local:8080/eat/6
+                  sleep 5
+                done
 
         - volumeMounts:
             - name: vertx
