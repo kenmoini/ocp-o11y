@@ -17,6 +17,21 @@ patches:
       name: instance
   - patch: |-
       - op: replace
+        path: /spec/collection/type
+        value: 'vector'
+    target:
+      kind: ClusterLogging
+      name: instance
+
+  - patch: |-
+      - op: delete
+        path: /spec/curation
+    target:
+      kind: ClusterLogging
+      name: instance
+
+  - patch: |-
+      - op: replace
         path: /spec/href
         value: 'https://kibana-openshift-logging.apps.core-ocp.d70.lab.kemo.network'
     target:
