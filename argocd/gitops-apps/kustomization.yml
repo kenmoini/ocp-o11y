@@ -8,3 +8,4 @@ resources:
   - simple-chat.yml
   - alertmanager-config.yml
   - bad-workloads.yml
+  - loki-operator.yml

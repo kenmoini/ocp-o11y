@@ -29,7 +29,6 @@ spec:
       version: v5
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: backend
         version: v5
@@ -94,7 +93,6 @@ spec:
       version: v6
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: backend
         version: v6
@@ -155,7 +153,6 @@ spec:
       app: leak
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: leak
       annotations:
