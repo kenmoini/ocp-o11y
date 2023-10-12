@@ -6,3 +6,5 @@ resources:
   - namespace.yml
   - operatorgroup.yml
   - subscription.yml
+  - console-plugin-patch-job.yml
+  - flowcollector.yml
