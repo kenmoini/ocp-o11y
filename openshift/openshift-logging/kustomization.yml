@@ -24,7 +24,7 @@ patches:
       name: instance
 
   - patch: |-
-      - op: delete
+      - op: remove
         path: /spec/curation
     target:
       kind: ClusterLogging
