@@ -25,6 +25,13 @@ patches:
 
   - patch: |-
       - op: remove
+        path: /spec/collection/logs
+    target:
+      kind: ClusterLogging
+      name: instance
+
+  - patch: |-
+      - op: remove
         path: /spec/curation
     target:
       kind: ClusterLogging
