@@ -11,6 +11,7 @@ Some weird stuff to walk through OpenShift Logging, Metrics, and Alerting in a G
 - Bad Workloads that crash often and do other trashy things
 - Loki Operator
 - Network Observability Operator
+- Custom user application with Prometheus metrics being emitted at `/metrics`
 
 There are some patches that will need to be customized for your cluster endpoint domain, probably good to fork this repo and make the modifications.
 
