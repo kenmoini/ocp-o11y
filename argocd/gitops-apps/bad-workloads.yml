@@ -1,0 +1,28 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bad-workloads
+  namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+spec:
+  syncPolicy:
+    syncOptions:
+      - RespectIgnoreDifferences=true
+    automated:
+      prune: true
+      allowEmpty: true
+      #selfHeal: false # overrides changes made on the cluster that drift from git state
+  destination:
+    server: 'https://kubernetes.default.svc'
+  sources:
+    - repoURL: 'https://github.com/kenmoini/ocp-o11y'
+      targetRevision: HEAD
+      path: openshift/bad-workloads/
+      #directory:
+      #  recurse: true
+      kustomize:
+        version: v4.4.1
+  project: ocp-o11y

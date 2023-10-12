@@ -7,3 +7,4 @@ resources:
   - openshift-elasticsearch-operator.yml
   - simple-chat.yml
   - alertmanager-config.yml
+  - bad-workloads.yml
