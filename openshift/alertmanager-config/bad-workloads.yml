@@ -233,15 +233,15 @@ spec:
             limits:
               cpu: "1"
               memory: 512Mi
-            command:
-              - /bin/bash
-              - -c
-              - |
-                #!/usr/bin/env bash
-                while true; do
-                  curl http://memory-hungry.bad-workloads.svc.cluster.local:8080/eat/6
-                  sleep 5
-                done
+          command:
+            - /bin/bash
+            - -c
+            - |
+              #!/usr/bin/env bash
+              while true; do
+                curl http://memory-hungry.bad-workloads.svc.cluster.local:8080/eat/6
+                sleep 5
+              done
 
         - volumeMounts:
             - name: vertx
