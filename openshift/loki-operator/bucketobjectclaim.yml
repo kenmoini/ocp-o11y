@@ -12,5 +12,5 @@ spec:
   additionalConfig:
     bucketclass: noobaa-default-bucket-class
   objectBucketName: loki-storage-bucket
-  bucketName: loki-storage-bucket
+  bucketName: obc-netobserv-loki-storage-bucket
   storageClassName: openshift-storage.noobaa.io
