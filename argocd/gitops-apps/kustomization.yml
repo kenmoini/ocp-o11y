@@ -10,3 +10,4 @@ resources:
   - bad-workloads.yml
   - loki-operator.yml
   - network-observability-operator.yml
+  - user-custom-metrics.yml
