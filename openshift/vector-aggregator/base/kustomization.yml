@@ -13,6 +13,6 @@ namespace: openshift-vector-aggregator
 
 resources:
   # Include Vector recommended base (from git).
-  - https://github.com/vectordotdev/vector/tree/master/distribution/kubernetes/vector-aggregator/kustomization.yml
+  - https://github.com/vectordotdev/vector/tree/master/distribution/kubernetes/vector-aggregator/kustomization.yaml
   # The namespace previously created to keep the resources in.
   - namespace.yaml
