@@ -7,4 +7,3 @@ resources:
   - secret-alertmanager-main.yml
   - pod-issues-PrometheusRule.yml
   - quota-high-usage-PrometheusRule.yml
-  - cluster-monitoring-config.yml
