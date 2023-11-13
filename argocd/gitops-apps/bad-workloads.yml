@@ -31,5 +31,8 @@ spec:
     - group: apps
       kind: Deployment
       jsonPointers:
+      - /metadata/generation
       - /status
+      - /status/unavailableReplicas
+      - /status/observedGeneration
       - /status/conditions
