@@ -12,7 +12,10 @@ namespace: openshift-vector-aggregator
 #    newTag: 0.34.0-distroless-libc
 
 resources:
-  # Include Vector recommended base (from git).
-  - https://raw.githubusercontent.com/vectordotdev/vector/master/distribution/kubernetes/vector-aggregator/kustomization.yaml
   # The namespace previously created to keep the resources in.
   - namespace.yaml
+  - https://raw.githubusercontent.com/vectordotdev/vector/master/distribution/kubernetes/vector-aggregator/configmap.yaml
+  - https://raw.githubusercontent.com/vectordotdev/vector/master/distribution/kubernetes/vector-aggregator/service-headless.yaml
+  - https://raw.githubusercontent.com/vectordotdev/vector/master/distribution/kubernetes/vector-aggregator/service.yaml
+  - https://raw.githubusercontent.com/vectordotdev/vector/master/distribution/kubernetes/vector-aggregator/serviceaccount.yaml
+  - https://raw.githubusercontent.com/vectordotdev/vector/master/distribution/kubernetes/vector-aggregator/statefulset.yaml
