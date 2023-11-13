@@ -9,6 +9,8 @@ metadata:
 spec:
   pipelines:
     - inputRefs:
+        - infrastructure
+        - application
         - audit
       name: enable-default-log-store
       outputRefs:
