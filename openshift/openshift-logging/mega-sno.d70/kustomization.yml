@@ -3,7 +3,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - github.com/redhat-cop/gitops-catalog/openshift-logging/operator/overlays/stable
   - github.com/redhat-cop/gitops-catalog/openshift-logging/instance/base
 
 
@@ -11,14 +10,23 @@ patches:
   - patch: |-
       - op: replace
         path: /spec/logStore/elasticsearch/storage/storageClassName
-        value: 'ocs-storagecluster-ceph-rbd'
+        value: 'lvms-vg1'
     target:
       kind: ClusterLogging
       name: instance
+
   - patch: |-
       - op: replace
         path: /spec/collection/type
         value: 'vector'
+    target:
+      kind: ClusterLogging
+      name: instance
+
+  - patch: |-
+      - op: replace
+        path: /spec/logStore/elasticsearch/storage/size
+        value: '50G'
     target:
       kind: ClusterLogging
       name: instance
@@ -40,7 +48,7 @@ patches:
   - patch: |-
       - op: replace
         path: /spec/href
-        value: 'https://kibana-openshift-logging.apps.core-ocp.d70.lab.kemo.network'
+        value: 'https://kibana-openshift-logging.apps.mega-sno.d70.lab.kemo.network'
     target:
       kind: ConsoleLink
       name: kibana-public-url
