@@ -13,3 +13,4 @@ resources:
   #- loki-operator.yml
   #- network-observability-operator.yml
   - user-custom-metrics.yml
+  - vector-aggregator.yml
