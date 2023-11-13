@@ -12,6 +12,7 @@ metadata:
   name: backend-v5
   namespace: bad-workloads
   annotations:
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
     app.openshift.io/vcs-ref: master
     app.openshift.io/vcs-uri: 'https://gitlab.com/ocp-demo/backend_quarkus'
   labels:
@@ -76,6 +77,7 @@ metadata:
   name: backend-v6
   namespace: bad-workloads
   annotations:
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
     app.openshift.io/vcs-ref: master
     app.openshift.io/vcs-uri: 'https://gitlab.com/ocp-demo/backend_quarkus'
   labels:
@@ -139,6 +141,8 @@ kind: Deployment
 metadata:
   name: leak
   namespace: bad-workloads
+  annotations:
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
   labels:
     app.kubernetes.io/component: leak
     app.kubernetes.io/instance: leak
@@ -199,6 +203,8 @@ kind: Deployment
 metadata:
   name: memory-hungry
   namespace: bad-workloads
+  annotations:
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
   labels:
     app.kubernetes.io/component: memory-hungry
     app.kubernetes.io/instance: memory-hungry
