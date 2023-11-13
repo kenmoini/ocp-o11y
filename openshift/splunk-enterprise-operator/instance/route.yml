@@ -15,7 +15,7 @@ metadata:
 spec:
   to:
     kind: Service
-    name: splunk-standalone-sample-standalone-service
+    name: splunk-s1-standalone-service
     weight: 100
   port:
     targetPort: http-splunkweb
