@@ -5,10 +5,6 @@ kind: Kustomization
 # Override the namespace of all of the resources we manage.
 namespace: openshift-vector-aggregator
 
-bases:
-  # Include Vector recommended base (from git).
-  - github.com/vectordotdev/vector/tree/master/distribution/kubernetes/vector-aggregator
-
 #images:
 #  # Override the Vector image to pin the version used.
 #  - name: timberio/vector
@@ -16,5 +12,7 @@ bases:
 #    newTag: 0.34.0-distroless-libc
 
 resources:
+  # Include Vector recommended base (from git).
+  - github.com/vectordotdev/vector/tree/master/distribution/kubernetes/vector-aggregator
   # The namespace previously created to keep the resources in.
   - namespace.yaml
