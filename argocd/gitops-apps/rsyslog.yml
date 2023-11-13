@@ -8,6 +8,12 @@ metadata:
     argocd.argoproj.io/sync-wave: "4"
     argocd.argoproj.io/compare-options: IgnoreExtraneous
 spec:
+  ignoreDifferences:
+  # for the specified json pointers
+    - group: apps
+      kind: DaemonSet
+      jsonPointers:
+      - /spec/template/spec/containers/0/image
   syncPolicy:
     syncOptions:
       - RespectIgnoreDifferences=true
