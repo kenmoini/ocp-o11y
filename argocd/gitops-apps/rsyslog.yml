@@ -19,7 +19,7 @@ spec:
     server: 'https://kubernetes.default.svc'
   sources:
     - repoURL: 'https://github.com/kenmoini/openshift-rsyslog'
-      targetRevision: main
+      targetRevision: trunk
       path: openshift/
       #directory:
       #  recurse: true
