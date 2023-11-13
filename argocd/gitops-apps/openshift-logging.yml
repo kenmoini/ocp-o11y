@@ -8,6 +8,13 @@ metadata:
     argocd.argoproj.io/sync-wave: "4"
     argocd.argoproj.io/compare-options: IgnoreExtraneous
 spec:
+  ignoreDifferences:
+  # for the specified json pointers
+    - group: logging.openshift.io
+      kind: ClusterLogForwarder
+      jsonPointers:
+      - /spec/pipelines
+      - /spec/outputs
   syncPolicy:
     syncOptions:
       - RespectIgnoreDifferences=true
@@ -19,14 +26,14 @@ spec:
     server: 'https://kubernetes.default.svc'
   sources:
     - repoURL: 'https://github.com/kenmoini/ocp-o11y'
-      targetRevision: HEAD
+      targetRevision: main
       path: openshift/openshift-logging/operator/
       #directory:
       #  recurse: true
       kustomize:
         version: v4.4.1
     - repoURL: 'https://github.com/kenmoini/ocp-o11y'
-      targetRevision: HEAD
+      targetRevision: main
       path: openshift/openshift-logging/instance/overlays/vector-aws/
       #directory:
       #  recurse: true

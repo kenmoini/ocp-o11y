@@ -7,11 +7,33 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
+  inputs:
+    - name: logger-app-logs
+      application:
+        namespaces:
+          - logger-app
   pipelines:
     - inputRefs:
         - infrastructure
         - application
         - audit
+        - logger-app-logs
       name: enable-default-log-store
       outputRefs:
         - default
+    #- inputRefs:
+    #    - infrastructure
+    #    - application
+    #    - audit
+    #    - logger-app-logs
+    #  name: vector-to-splunk
+    #  outputRefs:
+    #    - splunk-receiver
+  #outputs:
+  #  - name: splunk-receiver
+  #    secret:
+  #      name: vector-splunk-secret
+  #    type: splunk
+  #    url: >-
+  #      https://splunk-hec-openshift-splunk.apps.cluster-6pjcs.6pjcs.sandbox525.opentlc.com
+
