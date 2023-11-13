@@ -1,0 +1,17 @@
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: repo-openshift-rsyslog
+  namespace: openshift-gitops
+  labels:
+    argocd.argoproj.io/secret-type: repository
+  annotations:
+    managed-by: argocd.argoproj.io
+stringData:
+  name: openshift-rsyslog
+  project: ocp-o11y
+  type: git
+  insecure: "true"
+  url: https://github.com/kenmoini/openshift-rsyslog.git
+type: Opaque

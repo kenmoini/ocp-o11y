@@ -5,6 +5,7 @@ kind: Kustomization
 resources:
   - instance.yml
   - repo-upstream.yml
+  - repo-rsyslog.yml
   - ocp-o11y-AppOfApps.yml
   - ocp-o11y-AppProject.yml
   - console-plugin-patch-job.yml
