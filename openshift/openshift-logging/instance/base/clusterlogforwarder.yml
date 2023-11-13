@@ -29,7 +29,7 @@ spec:
     #  name: vector-to-splunk
     #  outputRefs:
     #    - splunk-receiver
-  #outputs:
+  outputs: []
   #  - name: splunk-receiver
   #    secret:
   #      name: vector-splunk-secret

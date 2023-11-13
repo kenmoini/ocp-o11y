@@ -1,0 +1,59 @@
+# This job will create the HEC token secret for Vector integration and a Route for the HEC endpoint
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ocplogging-splunk-glue-job
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+spec:
+  template:
+    spec:
+      containers:
+      - name: ocplogging-splunk-glue-job
+        image: registry.redhat.io/openshift4/ose-cli:latest
+        imagePullPolicy: IfNotPresent
+        command:
+          - /bin/bash
+          - -c
+          - |
+            #!/usr/bin/env bash
+
+            # Get the HEC Splunk Route
+            HEC_ROUTE=$(oc get route splunk-hec -n openshift-splunk -o jsonpath='{.spec.host}')
+
+            # Add the Output and Pipeline for Splunk
+            oc patch clusterlogforwarder instance -n openshift-logging --dry-run=client -o yaml --type=json --patch '
+            [
+              { 
+                "op": "add",
+                "path": "/spec/outputs/-",
+                "value": {
+                  "name": "splunk-receiver",
+                  "secret": {
+                    "name": "vector-splunk-secret"
+                  },
+                  "type": "splunk",
+                  "url": "https://'$HEC_ROUTE'"
+                }
+              },
+              { 
+                "op": "add",
+                "path": "/spec/pipelines/-",
+                "value": {
+                  "inputRefs": [
+                    "infrastructure",
+                    "application",
+                    "logger-app-logs"
+                  ],
+                  "name": "vector-to-splunk",
+                  "outputRefs": [
+                    "splunk-receiver"
+                  ]
+                }
+              }
+            ]
+            '
+
+      serviceAccountName: ocplogging-splunk-glue-job
+      restartPolicy: OnFailure

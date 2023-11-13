@@ -8,6 +8,7 @@ resources:
   - openshift-elasticsearch-operator.yml
   - splunk-operator.yml
   - splunk-instance.yml
+  - ocplogging-splunk-glue.yml
   - simple-chat.yml
   - alertmanager-config.yml
   - bad-workloads.yml
