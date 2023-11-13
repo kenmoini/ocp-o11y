@@ -5,9 +5,11 @@ kind: Kustomization
 resources:
   - openshift-logging.yml
   - openshift-elasticsearch-operator.yml
-  - simple-chat.yml
+  - splunk-operator.yml
+  - splunk-instance.yml
+  #- simple-chat.yml
   - alertmanager-config.yml
   - bad-workloads.yml
-  - loki-operator.yml
-  - network-observability-operator.yml
+  #- loki-operator.yml
+  #- network-observability-operator.yml
   - user-custom-metrics.yml

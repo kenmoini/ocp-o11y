@@ -2,10 +2,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: openshift-logging-operator
+  name: splunk-instance
   namespace: openshift-gitops
   annotations:
-    argocd.argoproj.io/sync-wave: "4"
+    argocd.argoproj.io/sync-wave: "9"
     argocd.argoproj.io/compare-options: IgnoreExtraneous
 spec:
   syncPolicy:
@@ -20,7 +20,7 @@ spec:
   sources:
     - repoURL: 'https://github.com/kenmoini/ocp-o11y'
       targetRevision: HEAD
-      path: openshift/openshift-logging/operator/
+      path: openshift/splunk-enterprise-operator/instance/
       #directory:
       #  recurse: true
       kustomize:
