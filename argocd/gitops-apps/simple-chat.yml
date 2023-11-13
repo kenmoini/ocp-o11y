@@ -19,7 +19,7 @@ spec:
     server: 'https://kubernetes.default.svc'
   sources:
     - repoURL: 'https://github.com/kenmoini/ocp-o11y'
-      targetRevision: HEAD
+      targetRevision: main
       path: openshift/simple-chat/
       #directory:
       #  recurse: true
