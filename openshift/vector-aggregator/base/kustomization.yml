@@ -13,7 +13,7 @@ namespace: openshift-vector-aggregator
 
 resources:
   # The namespace previously created to keep the resources in.
-  - namespace.yaml
+  - namespace.yml
   - https://raw.githubusercontent.com/vectordotdev/vector/master/distribution/kubernetes/vector-aggregator/configmap.yaml
   - https://raw.githubusercontent.com/vectordotdev/vector/master/distribution/kubernetes/vector-aggregator/service-headless.yaml
   - https://raw.githubusercontent.com/vectordotdev/vector/master/distribution/kubernetes/vector-aggregator/service.yaml
