@@ -1,0 +1,8 @@
+---
+apiVersion: enterprise.splunk.com/v4
+kind: Standalone
+metadata:
+  name: s1
+  namespace: openshift-splunk
+  finalizers:
+  - enterprise.splunk.com/delete-pvc

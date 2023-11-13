@@ -1,0 +1,24 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: splunk
+  namespace: openshift-splunk
+  labels:
+    app.kubernetes.io/component: standalone
+    app.kubernetes.io/instance: splunk-standalone-sample-standalone
+    app.kubernetes.io/managed-by: splunk-operator
+    app.kubernetes.io/name: standalone
+    app.kubernetes.io/part-of: splunk-standalone-sample-standalone
+  annotations:
+    openshift.io/host.generated: 'true'
+spec:
+  to:
+    kind: Service
+    name: splunk-standalone-sample-standalone-service
+    weight: 100
+  port:
+    targetPort: http-splunkweb
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Allow
+  wildcardPolicy: None
