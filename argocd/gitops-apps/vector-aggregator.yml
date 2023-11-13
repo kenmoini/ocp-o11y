@@ -20,7 +20,7 @@ spec:
   sources:
     - repoURL: 'https://github.com/kenmoini/ocp-o11y'
       targetRevision: HEAD
-      path: openshift/vector-aggregator/
+      path: openshift/vector-aggregator/overlays/default/
       #directory:
       #  recurse: true
       kustomize:
