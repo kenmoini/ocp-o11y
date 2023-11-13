@@ -16,7 +16,7 @@ spec:
     - inputRefs:
         - infrastructure
         - application
-        - audit
+        #- audit
         - logger-app-logs
       name: enable-default-log-store
       outputRefs:
