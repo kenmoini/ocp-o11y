@@ -23,7 +23,7 @@ spec:
             HEC_ROUTE=$(oc get route splunk-hec -n openshift-splunk -o jsonpath='{.spec.host}')
 
             # Add the Output and Pipeline for Splunk
-            oc patch clusterlogforwarder instance -n openshift-logging --dry-run=client -o yaml --type=json --patch '
+            oc patch clusterlogforwarder instance -n openshift-logging --type=json --patch '
             [
               { 
                 "op": "add",
