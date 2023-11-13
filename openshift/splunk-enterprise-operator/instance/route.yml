@@ -10,6 +10,7 @@ metadata:
     app.kubernetes.io/name: standalone
     app.kubernetes.io/part-of: splunk-standalone-sample-standalone
   annotations:
+    argocd.argoproj.io/sync-wave: "5"
     openshift.io/host.generated: 'true'
 spec:
   to:

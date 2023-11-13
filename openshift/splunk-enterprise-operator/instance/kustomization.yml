@@ -7,3 +7,5 @@ resources:
   - rbac.yml
   - instance.yml
   - route.yml
+  - consolelink-job.yml
+  - consolelink-rbac.yml

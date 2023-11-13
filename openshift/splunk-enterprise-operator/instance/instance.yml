@@ -4,5 +4,7 @@ kind: Standalone
 metadata:
   name: s1
   namespace: openshift-splunk
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
   finalizers:
   - enterprise.splunk.com/delete-pvc
