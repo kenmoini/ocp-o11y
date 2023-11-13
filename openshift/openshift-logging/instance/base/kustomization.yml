@@ -1,0 +1,9 @@
+---
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+
+resources:
+  - consolelink-rbac.yml
+  - consolelink-job.yml
+  - clusterlogging.yml
+  - clusterlogforwarder.yml

@@ -25,4 +25,11 @@ spec:
       #  recurse: true
       kustomize:
         version: v4.4.1
+    - repoURL: 'https://github.com/kenmoini/ocp-o11y'
+      targetRevision: HEAD
+      path: openshift/openshift-logging/instance/overlays/vector-aws/
+      #directory:
+      #  recurse: true
+      kustomize:
+        version: v4.4.1
   project: ocp-o11y

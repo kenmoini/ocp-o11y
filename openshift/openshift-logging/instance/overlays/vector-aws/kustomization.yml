@@ -1,0 +1,45 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../base
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/logStore/elasticsearch/storage/storageClassName
+        value: 'gp3-csi'
+    target:
+      kind: ClusterLogging
+      name: instance
+
+  - patch: |-
+      - op: replace
+        path: /spec/collection/type
+        value: 'vector'
+    target:
+      kind: ClusterLogging
+      name: instance
+
+  - patch: |-
+      - op: replace
+        path: /spec/logStore/elasticsearch/storage/size
+        value: '50G'
+    target:
+      kind: ClusterLogging
+      name: instance
+
+  - patch: |-
+      - op: remove
+        path: /spec/collection/logs
+    target:
+      kind: ClusterLogging
+      name: instance
+
+  - patch: |-
+      - op: remove
+        path: /spec/curation
+    target:
+      kind: ClusterLogging
+      name: instance
