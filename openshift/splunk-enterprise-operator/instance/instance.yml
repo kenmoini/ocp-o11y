@@ -3,7 +3,6 @@ apiVersion: enterprise.splunk.com/v4
 kind: Standalone
 metadata:
   name: s1
-  namespace: openshift-splunk
   annotations:
     argocd.argoproj.io/sync-wave: "3"
   finalizers:

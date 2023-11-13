@@ -1,0 +1,22 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: rsyslog-service
+spec:
+  ports:
+    - name: 5514-udp
+      protocol: UDP
+      port: 5514
+      targetPort: 5514
+    - name: 5514-tcp
+      protocol: TCP
+      port: 5514
+      targetPort: 5514
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/component: standalone
+    app.kubernetes.io/instance: splunk-s1-standalone
+    app.kubernetes.io/managed-by: splunk-operator
+    app.kubernetes.io/name: standalone
+    app.kubernetes.io/part-of: splunk-s1-standalone

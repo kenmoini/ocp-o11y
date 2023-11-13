@@ -1,0 +1,74 @@
+# This job will create the HEC token secret for Vector integration and a Route for the HEC endpoint
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: splunk-hec-route-job
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+spec:
+  template:
+    spec:
+      containers:
+      - name: splunk-hec-route-job
+        image: registry.redhat.io/openshift4/ose-cli:latest
+        imagePullPolicy: IfNotPresent
+        command:
+          - /bin/bash
+          - -c
+          - |
+            #!/usr/bin/env bash
+
+            BASE_DOMAIN=$(oc get ingresscontroller/default -n openshift-ingress-operator -o jsonpath='{.status.domain}')
+            
+            # Make sure the pod has been spun up
+            until oc get pod -n openshift-splunk -l app.kubernetes.op/name=standalone -l app.kubernetes.io/part-of=splunk-s1-standalone --no-headers; do echo 'Waiting for pod...'; sleep 10; done
+
+            # Wait for the statefulset pod to be ready
+            oc wait -n openshift-splunk --for=condition=ready pod -l app.kubernetes.op/name=standalone -l app.kubernetes.io/part-of=splunk-s1-standalone
+
+            # Get the default HEC Token
+            HEC_TOKEN=$(oc get secret -n openshift-splunk --no-headers splunk-s1-standalone-secret-v1 -o jsonpath='{.data.hec_token}' | base64 -d)
+
+            # Get the default Splunk CA
+            oc exec splunk-s1-standalone-0 -n openshift-splunk -- cat etc/auth/ca.pem | sed '/END CERTIFICATE/q' > /tmp/ca.pem
+
+            # Create the HEC Route
+            cat > /tmp/hec-route.yml <<ROUTEEOF
+            kind: Route
+            apiVersion: route.openshift.io/v1
+            metadata:
+              name: splunk-hec
+              labels:
+                app.kubernetes.io/component: standalone
+                app.kubernetes.io/instance: splunk-s1-standalone
+                app.kubernetes.io/managed-by: splunk-operator
+                app.kubernetes.io/name: standalone
+                app.kubernetes.io/part-of: splunk-s1-standalone
+              annotations:
+                openshift.io/host.generated: 'true'
+            spec:
+              to:
+                kind: Service
+                name: splunk-s1-standalone-service
+                weight: 100
+              port:
+                targetPort: http-hec
+              tls:
+                termination: reencrypt
+                destinationCACertificate: |-
+            $(cat /tmp/ca.pem | awk '{printf "      %s\n", $0}')
+                insecureEdgeTerminationPolicy: Allow
+              wildcardPolicy: None
+            ROUTEEOF
+
+            # Refresh the route
+            oc delete route splunk-hec -n openshift-splunk || true
+            oc create -f /tmp/hec-route.yml -n openshift-splunk
+
+            # Refresh the secret
+            oc delete secret vector-splunk-secret -n openshift-logging || true
+            oc create secret generic vector-splunk-secret -n openshift-logging --from-literal=hecToken=$HEC_TOKEN
+
+      serviceAccountName: splunk-hec-route-job
+      restartPolicy: OnFailure

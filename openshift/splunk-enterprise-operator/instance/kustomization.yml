@@ -8,6 +8,9 @@ resources:
   - namespace.yml
   - rbac.yml
   - instance.yml
+  - rsyslog-service.yml
   - route.yml
   - consolelink-job.yml
   - consolelink-rbac.yml
+  - hec-route-job.yml
+  - hec-route-rbac.yml

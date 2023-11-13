@@ -2,7 +2,6 @@ kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
   name: splunk
-  namespace: openshift-splunk
   labels:
     app.kubernetes.io/component: standalone
     app.kubernetes.io/instance: splunk-standalone-sample-standalone
