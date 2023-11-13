@@ -5,7 +5,7 @@ metadata:
   name: splunk-instance
   namespace: openshift-gitops
   annotations:
-    argocd.argoproj.io/sync-wave: "9"
+    argocd.argoproj.io/sync-wave: "3"
     argocd.argoproj.io/compare-options: IgnoreExtraneous
 spec:
   syncPolicy:
